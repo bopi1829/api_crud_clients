@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { style } from '../components/style';
 
 export default function LoginPage() {
   return (
@@ -30,9 +31,11 @@ export default function LoginPage() {
         <Typography
           component="h1"
           variant="h5"
+          sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}
         >
           Se connecter
         </Typography>
+        <span style={style} />
         <Box
           component="form"
           noValidate

@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
+import { style } from '../components/style';
 
 export default function SignUpPage() {
   return (
@@ -30,9 +31,11 @@ export default function SignUpPage() {
         <Typography
           component="h1"
           variant="h5"
+          sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}
         >
           S&apos;inscrire
         </Typography>
+        <span style={style} />
         <Box
           component="form"
           noValidate
