@@ -39,8 +39,8 @@ export default function SignUpPage() {
     } catch (error) {
       console.log('Erreur :', error);
     }
-
-    /*
+  };
+  /*
     const { firstName, lastName, email, password } = user;
     const response = await fetch(uri, {
       method: 'post',
@@ -56,144 +56,143 @@ export default function SignUpPage() {
     alert('Inscription réussie !');
   };
 */
-    return (
-      <Container
-        component="main"
-        maxWidth="xs"
+  return (
+    <Container
+      component="main"
+      maxWidth="xs"
+    >
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography
-            component="h1"
-            variant="h5"
-            sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}
+          S&apos;inscrire
+        </Typography>
+        <span style={style} />
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 3 }}
+        >
+          <Grid
+            container
+            spacing={2}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={6}
+            >
+              <TextField
+                value={user.firstName}
+                autoComplete="given-name"
+                name="firstName"
+                required
+                fullWidth
+                id="firstName"
+                label="Prénom"
+                autoFocus
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+            >
+              <TextField
+                value={user.lastName}
+                required
+                fullWidth
+                id="lastName"
+                label="Nom"
+                name="lastName"
+                autoComplete="family-name"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <TextField
+                value={user.email}
+                required
+                fullWidth
+                id="email"
+                label="Adresse email"
+                name="email"
+                autoComplete="email"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <TextField
+                value={user.password}
+                required
+                fullWidth
+                name="password"
+                label="Mot de passe"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    value="allowExtraEmails"
+                    color="primary"
+                  />
+                }
+                label="J'accepte de recevoir, les promotions commerciales et les mises à jour par email"
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={PostData}
           >
             S&apos;inscrire
-          </Typography>
-          <span style={style} />
-          <Box
-            component="form"
-            noValidate
-            sx={{ mt: 3 }}
+          </Button>
+          <Grid
+            container
+            justifyContent="flex-end"
           >
-            <Grid
-              container
-              spacing={2}
-            >
-              <Grid
-                item
-                xs={12}
-                sm={6}
+            <Grid item>
+              <Link
+                href="/"
+                to="/"
+                variant="body2"
               >
-                <TextField
-                  value={user.firstName}
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="Prénom"
-                  autoFocus
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={6}
-              >
-                <TextField
-                  value={user.lastName}
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Nom"
-                  name="lastName"
-                  autoComplete="family-name"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-              >
-                <TextField
-                  value={user.email}
-                  required
-                  fullWidth
-                  id="email"
-                  label="Adresse email"
-                  name="email"
-                  autoComplete="email"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-              >
-                <TextField
-                  value={user.password}
-                  required
-                  fullWidth
-                  name="password"
-                  label="Mot de passe"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="allowExtraEmails"
-                      color="primary"
-                    />
-                  }
-                  label="J'accepte de recevoir, les promotions commerciales et les mises à jour par email"
-                />
-              </Grid>
+                Vous avez déjà un compte ? Se connecter
+              </Link>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              //onClick={PostData}
-            >
-              S&apos;inscrire
-            </Button>
-            <Grid
-              container
-              justifyContent="flex-end"
-            >
-              <Grid item>
-                <Link
-                  href="/"
-                  to="/"
-                  variant="body2"
-                >
-                  Vous avez déjà un compte ? Se connecter
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
+          </Grid>
         </Box>
-      </Container>
-    );
-  };
+      </Box>
+    </Container>
+  );
 }

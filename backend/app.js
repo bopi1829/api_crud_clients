@@ -1,11 +1,13 @@
 import express from 'express';
 import 'dotenv/config';
+import cors from 'cors';
 import { mongodbConnection } from './connection/mongodbConnection.js';
 import { User } from './models/User.js';
 
 export const app = express();
 
 // Eviter les problèmes de CORS
+app.use(cors());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
