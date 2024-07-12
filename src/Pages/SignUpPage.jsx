@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,136 +11,189 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import { style } from '../components/style';
+import axios from 'axios';
 
 export default function SignUpPage() {
-  return (
-    <Container
-      component="main"
-      maxWidth="xs"
-    >
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    console.log(e);
+    const name = e.target.name;
+    const value = e.target.value;
+    setUser({ ...user, [name]: value });
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const PostData = async (e) => {
+    console.log('PostData', PostData);
+    const uri = 'http://localhost:3000/register';
+    e.preventDefault();
+    try {
+      const response = await axios.post(uri, user);
+      console.log(response.user);
+    } catch (error) {
+      console.log('Erreur :', error);
+    }
+
+    /*
+    const { firstName, lastName, email, password } = user;
+    const response = await fetch(uri, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName, lastName, email, password }),
+    });
+    const data = await response.json();
+    if (response.status === 404 || !data) {
+      alert('Veuillez remplir tous les champs du formulaire');
+      console.log('Error :');
+    }
+    console.log('Inscription réussie !');
+    alert('Inscription réussie !');
+  };
+*/
+    return (
+      <Container
+        component="main"
+        maxWidth="xs"
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography
-          component="h1"
-          variant="h5"
-          sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}
-        >
-          S&apos;inscrire
-        </Typography>
-        <span style={style} />
         <Box
-          component="form"
-          noValidate
-          sx={{ mt: 3 }}
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
         >
-          <Grid
-            container
-            spacing={2}
-          >
-            <Grid
-              item
-              xs={12}
-              sm={6}
-            >
-              <TextField
-                autoComplete="given-name"
-                name="firstName"
-                required
-                fullWidth
-                id="firstName"
-                label="Prénom"
-                autoFocus
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-            >
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Nom"
-                name="lastName"
-                autoComplete="family-name"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Adresse email"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Mot de passe"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value="allowExtraEmails"
-                    color="primary"
-                  />
-                }
-                label="J'accepte de recevoir, les promotions commerciales et les mises à jour par email"
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}
           >
             S&apos;inscrire
-          </Button>
-          <Grid
-            container
-            justifyContent="flex-end"
+          </Typography>
+          <span style={style} />
+          <Box
+            component="form"
+            noValidate
+            sx={{ mt: 3 }}
           >
-            <Grid item>
-              <Link
-                href="/"
-                to="/"
-                variant="body2"
+            <Grid
+              container
+              spacing={2}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={6}
               >
-                Vous avez déjà un compte ? Se connecter
-              </Link>
+                <TextField
+                  value={user.firstName}
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="Prénom"
+                  autoFocus
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+              >
+                <TextField
+                  value={user.lastName}
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Nom"
+                  name="lastName"
+                  autoComplete="family-name"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+              >
+                <TextField
+                  value={user.email}
+                  required
+                  fullWidth
+                  id="email"
+                  label="Adresse email"
+                  name="email"
+                  autoComplete="email"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+              >
+                <TextField
+                  value={user.password}
+                  required
+                  fullWidth
+                  name="password"
+                  label="Mot de passe"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+              >
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      value="allowExtraEmails"
+                      color="primary"
+                    />
+                  }
+                  label="J'accepte de recevoir, les promotions commerciales et les mises à jour par email"
+                />
+              </Grid>
             </Grid>
-          </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              //onClick={PostData}
+            >
+              S&apos;inscrire
+            </Button>
+            <Grid
+              container
+              justifyContent="flex-end"
+            >
+              <Grid item>
+                <Link
+                  href="/"
+                  to="/"
+                  variant="body2"
+                >
+                  Vous avez déjà un compte ? Se connecter
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
-      </Box>
-    </Container>
-  );
+      </Container>
+    );
+  };
 }
