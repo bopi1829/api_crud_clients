@@ -28,10 +28,9 @@ export default function SignUpPage() {
     setUser({ ...user, [name]: value });
   };
 
-  // eslint-disable-next-line no-unused-vars
   const PostData = async (e) => {
     console.log('PostData', PostData);
-    const uri = 'http://localhost:3000/register';
+    const uri = 'http://localhost:3000/api/signup';
     e.preventDefault();
     try {
       const response = await axios.post(uri, user);
@@ -40,22 +39,7 @@ export default function SignUpPage() {
       console.log('Erreur :', error);
     }
   };
-  /*
-    const { firstName, lastName, email, password } = user;
-    const response = await fetch(uri, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ firstName, lastName, email, password }),
-    });
-    const data = await response.json();
-    if (response.status === 404 || !data) {
-      alert('Veuillez remplir tous les champs du formulaire');
-      console.log('Error :');
-    }
-    console.log('Inscription réussie !');
-    alert('Inscription réussie !');
-  };
-*/
+
   return (
     <Container
       component="main"
@@ -147,8 +131,6 @@ export default function SignUpPage() {
                 fullWidth
                 name="password"
                 label="Mot de passe"
-                type="password"
-                id="password"
                 autoComplete="new-password"
                 onChange={handleChange}
               />
